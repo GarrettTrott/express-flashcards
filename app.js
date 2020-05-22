@@ -2,6 +2,13 @@ const express = require("express");
 
 const app = express();
 
+const people = [
+  { first: "Jason", last: "Smith" },
+  { first: "Carl", last: "Whitemer" },
+  { first: "Carla", last: "Scheenstra" },
+  { first: "Garrett", last: "Trott" },
+];
+
 app.set("view engine", "pug");
 
 app.get("/", (req, res) => {
@@ -9,7 +16,16 @@ app.get("/", (req, res) => {
 });
 
 app.get("/cards", (req, res) => {
-  res.render("card", { prompt: "Who is buried in Grant's tomb?" });
+  res.render("card", {
+    prompt: "Who is buried in Grant's tomb?",
+  });
+});
+
+// sandbox
+// first name | last name
+
+app.get("/sandbox", (req, res) => {
+  res.render("sandbox", { people });
 });
 
 app.listen(3000, () => {

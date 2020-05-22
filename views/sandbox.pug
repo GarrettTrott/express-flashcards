@@ -1,0 +1,18 @@
+doctype html
+html(lang="en")
+  head
+    title Table of friends
+  body
+    header
+      h1 Table of friends
+    section#content
+      tr
+        th Firstname
+        th Lastname
+      tr
+        each person in people
+          td= person.first
+          td= person.last
+    footer
+      p A list of people
+      s
