@@ -1,18 +1,12 @@
-doctype html
-html(lang="en")
-  head
-    title Table of friends
-  body
-    header
-      h1 Table of friends
-    section#content
+extends layout.pug
+
+block content
+  section#content
+    table
       tr
         th Firstname
         th Lastname
-      tr
-        each person in people
+      each person in people
+        tr  
           td= person.first
           td= person.last
-    footer
-      p A list of people
-      s
