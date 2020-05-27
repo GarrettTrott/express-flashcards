@@ -32,13 +32,24 @@ app.get("/cards", (req, res) => {
 });
 
 app.get("/hello", (req, res) => {
-  res.render("hello");
+  const name = req.cookies.username;
+  if (name) {
+    res.redirect("/");
+  } else {
+    res.render("hello");
+  }
 });
 
 app.post("/hello", (req, res) => {
   res.cookie("username", req.body.username);
   res.redirect("/");
 });
+
+app.post("/goodbye", (req, res) => {
+  res.clearCookie("username");
+  res.redirect("/hello");
+});
+
 // sandbox
 // first name | last name
 
