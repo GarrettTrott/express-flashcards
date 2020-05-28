@@ -4,13 +4,6 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 
-const people = [
-  { first: "Jason", last: "Smith" },
-  { first: "Carl", last: "Whitemer" },
-  { first: "Carla", last: "Scheenstra" },
-  { first: "Garrett", last: "Trott" },
-];
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
@@ -50,11 +43,16 @@ app.post("/goodbye", (req, res) => {
   res.redirect("/hello");
 });
 
-// sandbox
-// first name | last name
+app.use((req, res, next) => {
+  const err = new Error("Not Found");
+  err.status = 404;
+  next(err);
+});
 
-app.get("/sandbox", (req, res) => {
-  res.render("sandbox", { people });
+app.use((err, req, res, next) => {
+  res.locals.error = err;
+  res.status(err.status);
+  res.render("error", err);
 });
 
 app.listen(3000, () => {
